@@ -1,0 +1,31 @@
+<div class="container">
+<div class="col-sm-12">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+    <tr>
+      <th scope="col">NO</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">NAMA BUKU</th>
+      <th scope="col">QTY</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let buku of bukuParent, let i=index">
+      <th scope="col">{{i + 1}}</th>
+      <th scope="col">{{buku.isbn}}</th>
+      <th scope="col">{{buku.namaBuku}}</th>
+      <th scope="col">{{buku.qty}}</th>
+      <th scope="col"><button class="btn btn-danger" (click)="deleteBuku(i)" >Delete</button></th>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="3">Total</td>
+      <td>{{getTotal()}}</td>
+      <td> <button class="btn btn-success"(click)="(getBuku())">Pinjam</button> </td>
+    </tr>
+    </tfoot>
+  </table>
+</div>
+</div>

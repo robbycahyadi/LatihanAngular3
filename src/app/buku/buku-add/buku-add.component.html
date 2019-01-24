@@ -1,0 +1,47 @@
+<div class="container">
+  <form [formGroup]="bukuForm" (ngSubmit)="pilihBuku()" id="form-group">
+    <div class="col-sm-12">
+      <div class="form-row align-items-center">
+        <div class="col-sm-3">
+          <label class="sr-only">ISBN</label>
+          <input type="text" class="form-control mb-2" [formControlName]="'isbn'" id="ISBN" placeholder="ISBN" >
+          <span *ngIf="!bukuForm.get('isbn').valid && bukuForm.get('isbn').touched" class="help-block">
+            <span *ngIf="bukuForm.get('isbn').errors['required']">
+              Wajib Diisi!
+            </span>
+            <span *ngIf="bukuForm.get('isbn').errors['blank']">
+              Tidak Boleh Kosong!
+            </span>
+          </span>
+        </div>
+        <div class="col-sm-6">
+          <label class="sr-only">NAMA BUKU</label>
+          <input type="text" class="form-control mb-2" [formControlName]="'namaBuku'" id="nama-buku" placeholder="Nama Buku" >
+          <span *ngIf="!bukuForm.get('namaBuku').valid && bukuForm.get('namaBuku').touched" class="help-block">
+            <span *ngIf="bukuForm.get('namaBuku').errors['required']">
+              Wajib Diisi!
+            </span>
+            <span *ngIf="bukuForm.get('namaBuku').errors['blank']">
+              Tidak Boleh Kosong!
+            </span>
+          </span>
+        </div>
+        <div class="col-sm-2">
+          <label class="sr-only">QTY</label>
+          <input type="number" class="form-control mb-2" [formControlName]="'qty'" id="qty" placeholder="Qty" >
+          <span *ngIf="!bukuForm.get('qty').valid && bukuForm.get('qty').touched" class="help-block">
+            <span *ngIf="bukuForm.get('qty').errors['required']">
+              Wajib Diisi!
+            </span>
+            <span *ngIf="bukuForm.get('qty').errors['blank']">
+              Tidak Boleh Kosong!
+            </span>
+          </span>
+        </div>
+        <div class="col-sm-1">
+          <button type="submit"  class="btn btn-primary btn-block mb-2" [disabled]="!bukuForm.valid">Pilih</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
