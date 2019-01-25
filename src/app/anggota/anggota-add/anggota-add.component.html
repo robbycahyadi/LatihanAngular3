@@ -1,0 +1,31 @@
+<div class="container">
+  <form [formGroup]="anggotaForm" (ngSubmit)="tambahAnggota()" id="form-group">
+    <div class="col-sm-12">
+      <div class="form-row align-items-center">
+        <div class="col-sm-3">
+          <label class="sr-only">NAMA</label>
+          <input type="text" class="form-control mb-2" [formControlName]="'namaAnggota'" id="nama-anggota" placeholder="Nama" >
+          <span *ngIf="!anggotaForm.get('namaAnggota').valid && anggotaForm.get('namaAnggota').touched" class="help-block">
+            <span *ngIf="anggotaForm.get('namaAnggota').errors['required']">
+              Wajib Diisi!
+            </span>
+            <span *ngIf="anggotaForm.get('namaAnggota').errors['blank']">
+              Tidak Boleh Kosong!
+            </span>
+          </span>
+        </div>
+        <div class="col-sm-6">
+          <label class="sr-only">ALAMAT</label>
+          <input type="text" class="form-control mb-2" [formControlName]="'alamatAnggota'" id="alamat-anggota" placeholder="Alamat" >
+        </div>
+        <div class="col-sm-2">
+          <label class="sr-only">NO. KTP</label>
+          <input type="number" class="form-control mb-2" [formControlName]="'nomor_ktp'" id="nomor-ktp" placeholder="No. KTP" >
+        </div>
+        <div class="col-sm-1">
+          <button type="submit"  class="btn btn-primary btn-block mb-2" [disabled]="!anggotaForm.valid">Pilih</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
