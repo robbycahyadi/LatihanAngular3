@@ -1,3 +1,37 @@
-<p>
-  anggota-edit works!
-</p>
+<div class="container">
+  <form [formGroup]="anggotaForm" (ngSubmit)="tambahAnggota()" id="form-group">
+    <div class="col-sm-12">
+      <div class="f">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">NAMA</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" [formControlName]="'namaAnggota'" id="nama-anggota" placeholder="Nama" >
+            <span *ngIf="!anggotaForm.get('namaAnggota').valid && anggotaForm.get('namaAnggota').touched" class="help-block">
+              <span *ngIf="anggotaForm.get('namaAnggota').errors['required']">
+                Wajib Diisi!
+              </span>
+              <span *ngIf="anggotaForm.get('namaAnggota').errors['blank']">
+                Tidak Boleh Kosong!
+              </span>
+            </span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">ALAMAT</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" [formControlName]="'alamatAnggota'" id="alamat-anggota" placeholder="Alamat" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">NO. KTP</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" [formControlName]="'nomor_ktp'" id="nomor-ktp" placeholder="No. KTP" >
+          </div>
+        </div>
+        <div class="mx-auto col-sm-2">
+          <button type="submit"  class="btn btn-primary btn-block mb-2 " [disabled]="!anggotaForm.valid">Pilih</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

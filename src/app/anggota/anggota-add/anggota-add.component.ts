@@ -33,7 +33,7 @@ export class AnggotaAddComponent implements OnInit {
     anggotaModel.alamat = this.anggotaForm.get('alamatAnggota').value;
     anggotaModel.nomor_ktp = this.anggotaForm.get('nomor_ktp').value;
     console.log(anggotaModel);
-    // this.bukuAdd.emit(anggotaModel);
+
     this.anggotaService.addAnggota(anggotaModel).subscribe(
       data => {
         alert(data.nama + ' berhasil disimpan, dengan id ' + data.id);
