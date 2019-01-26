@@ -2,8 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AnggotaModel} from '../anggota.model';
 import {AnggotaService} from '../anggota.service';
-import {Subscription} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-anggota-add',
@@ -15,14 +13,10 @@ export class AnggotaAddComponent implements OnInit {
 
   anggotaForm: FormGroup;
   private idx: string;
-  private sub: Subscription;
   parentTalk: string;
 
 
-  constructor(private anggotaService: AnggotaService, private route: ActivatedRoute) {
-    this.sub = this.route.params.subscribe(params => {
-      this.idx = params['id'];
-    });
+  constructor(private anggotaService: AnggotaService) {
 
     this.anggotaForm = new FormGroup({
       namaAnggota: new FormControl(null, [Validators.required, this.cekIsEmpty]),
