@@ -16,7 +16,7 @@
         <td scope="col">{{anggota.nomor_ktp}}</td>
         <td scope="col">{{anggota.nama}}</td>
         <td scope="col">{{anggota.alamat}}</td>
-        <td scope="col"><button class="btn btn-info" [routerLink]="[ '/anggota-edit', anggota.id]" >Edit</button></td>
+        <td scope="col"><button class="btn btn-info" (click)="onEdit(anggota.id)"  >Edit</button></td>
       </tr>
       </tbody>
       <tfoot>

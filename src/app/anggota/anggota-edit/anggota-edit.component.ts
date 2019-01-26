@@ -3,6 +3,7 @@ import {AnggotaService} from '../anggota.service';
 import {ActivatedRoute} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
+import {AnggotaModel} from '../anggota.model';
 
 @Component({
   selector: 'app-anggota-edit',
@@ -39,6 +40,23 @@ export class AnggotaEditComponent implements OnInit {
           nomor_ktp: new FormControl(data.nomor_ktp, [Validators.required])
         });
       });
+    }
+  }
+
+  ubahAnggota() {
+    if (this.idx) {
+      const anggotaModel = new AnggotaModel();
+      anggotaModel.id = this.idx;
+      anggotaModel.nama = this.anggotaForm.get('namaAnggota').value;
+      anggotaModel.alamat = this.anggotaForm.get('alamatAnggota').value;
+      anggotaModel.nomor_ktp = this.anggotaForm.get('nomor_ktp').value;
+      console.log(anggotaModel);
+
+      this.anggotaService.addAnggota(anggotaModel).subscribe(
+        data => {
+          alert(data.nama + ' berhasil diubah, dengan id ' + data.id);
+        });
+      this.anggotaForm.reset();
     }
   }
 

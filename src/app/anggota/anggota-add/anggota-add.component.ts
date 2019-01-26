@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AnggotaModel} from '../anggota.model';
 import {AnggotaService} from '../anggota.service';
+import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {Subscribable, Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-anggota-add',
@@ -14,17 +14,40 @@ import {Subscribable, Subscription} from 'rxjs';
 export class AnggotaAddComponent implements OnInit {
 
   anggotaForm: FormGroup;
+  private idx: string;
+  private sub: Subscription;
+  parentTalk: string;
 
 
+  constructor(private anggotaService: AnggotaService, private route: ActivatedRoute) {
+    this.sub = this.route.params.subscribe(params => {
+      this.idx = params['id'];
+    });
 
-  constructor(private anggotaService: AnggotaService) {  }
-
-  ngOnInit() {
     this.anggotaForm = new FormGroup({
       namaAnggota: new FormControl(null, [Validators.required, this.cekIsEmpty]),
-      alamatAnggota: new FormControl(null, [Validators.required, this.cekIsEmpty]),
+      alamatAnggota: new FormControl(null, []),
       nomor_ktp: new FormControl(null, [Validators.required])
     });
+  }
+
+  ngOnInit() {
+    if (this.idx) {
+      this.anggotaService.getAnggota(this.idx).subscribe(data => {
+        console.log(data.nama);
+        this.anggotaForm = new FormGroup({
+          namaAnggota: new FormControl(data.nama, [Validators.required]),
+          alamatAnggota: new FormControl(data.alamat, [Validators.required]),
+          nomor_ktp: new FormControl(data.nomor_ktp, [Validators.required])
+        });
+      });
+    } else {
+      this.anggotaForm = new FormGroup({
+        namaAnggota: new FormControl(null, [Validators.required, this.cekIsEmpty]),
+        alamatAnggota: new FormControl(null, [Validators.required, this.cekIsEmpty]),
+        nomor_ktp: new FormControl(null, [Validators.required])
+      });
+    }
   }
 
   tambahAnggota() {
@@ -32,13 +55,21 @@ export class AnggotaAddComponent implements OnInit {
     anggotaModel.nama = this.anggotaForm.get('namaAnggota').value;
     anggotaModel.alamat = this.anggotaForm.get('alamatAnggota').value;
     anggotaModel.nomor_ktp = this.anggotaForm.get('nomor_ktp').value;
+    if (this.idx) {
+      anggotaModel.id = this.idx;
+    }
     console.log(anggotaModel);
-
     this.anggotaService.addAnggota(anggotaModel).subscribe(
       data => {
         alert(data.nama + ' berhasil disimpan, dengan id ' + data.id);
+        this.parentTalk = data.id;
       });
     this.anggotaForm.reset();
+  }
+
+  onDataEdit(id: string) {
+    this.idx = id;
+    this.ngOnInit();
   }
 
   cekIsEmpty(control: FormControl): { [s: string]: boolean } {

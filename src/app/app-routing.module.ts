@@ -7,9 +7,8 @@ import {AnggotaEditComponent} from './anggota/anggota-edit/anggota-edit.componen
 
 const routes: Routes = [
   {path: 'buku', component: BukuComponent},
-  {path: 'anggota', component: AnggotaListComponent},
-  {path: 'anggota-add', component: AnggotaAddComponent},
-  {path: 'anggota-edit/:id', component: AnggotaEditComponent}
+  {path: 'anggota', component: AnggotaAddComponent},
+  {path: 'anggota-edit/:id', component: AnggotaAddComponent}
 ];
 
 @NgModule({
