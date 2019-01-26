@@ -1,0 +1,23 @@
+<div class="container">
+  <form id="form-group">
+    <div class="col-sm-12">
+      <div class="f">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">USERNAME</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="username" placeholder="Username" #username>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">PASSWORD</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="alamat-anggota" placeholder="Password" #password>
+          </div>
+        </div>
+        <div class="mx-auto col-sm-2">
+          <button type="submit"  class="btn btn-primary btn-block mb-2 " (click)="onLogin(username, password)">Login</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
